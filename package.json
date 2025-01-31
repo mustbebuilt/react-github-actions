@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://mustbebuilt.github.io/react-github-actions",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
