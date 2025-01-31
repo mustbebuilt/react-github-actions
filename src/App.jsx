@@ -1,33 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import {useState} from 'react'
 import './App.css'
+import Navbar from './Components/Navbar'
+import Banner from './Components/Banner'
+import Welcome from './Components/Welcome'
+import Staff from './Components/Staff'
+import Students from './Components/Students'
+import Footer from './Components/Footer'
+import Courses from './Components/Courses'
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+
+  const [activeComponent, setActiveComponent] = useState('welcome')
+
+const renderComponent = () =>{
+  switch(activeComponent){
+    case 'Staff':
+      return <Staff />;
+    case 'Students':
+      return <Students />;
+    case 'Courses':
+      return <Courses />;
+    case 'Welcome':
+      return <Welcome msg="Hello" />;
+    default:
+      return <Welcome msg="Welcome There" />;
+  }
+}
+
+const handleNav = (ev, page) => {
+  ev.preventDefault();
+  console.log(`The ${page} link was clicked.`);
+  setActiveComponent(page)
+  // Additional logic here if needed
+};
+
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <Navbar handleNav={handleNav} />
+    <Banner/>
+    <main>
+    {renderComponent()}
+    </main>
+    <Footer />
     </>
   )
 }
